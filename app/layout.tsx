@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
+import { CreateNoteModal } from '@/components/create-note-modal'
 
 import { ThemeProvider } from '@/components/theme-provider';
 
@@ -65,6 +66,7 @@ export default async function RootLayout({
         >
           <Toaster position="top-center" />
           {children}
+          <CreateNoteModal />
         </ThemeProvider>
       </body>
     </html>
