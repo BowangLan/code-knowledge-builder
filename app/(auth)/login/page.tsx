@@ -34,10 +34,33 @@ export default function Page() {
     }
   }, [state.status, router]);
 
-  const handleSubmit = (formData: FormData) => {
-    setEmail(formData.get('email') as string);
-    formAction(formData);
-  };
+const handleSubmit = async () => {
+  try {
+    setIsLoading(true)
+    const response = await fetch('/api/note/ai-create', {  // Changed endpoint
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userInput: code }),  // Changed to userInput
+    })
+    
+    if (!response.ok) throw new Error('Failed to create note')
+    
+    const data = await response.json()
+    if (data.success) {
+      // Optional: Show success message
+      window.location.href = `/notes/${data.notes[0].id}`  // Changed to use notes array
+    } else {
+      throw new Error(data.message || 'Failed to create note')
+    }
+  } catch (error) {
+    console.error('Error:', error)
+  } finally {
+    setIsLoading(false)
+    setOpen(false)
+  }
+}
 
   return (
     <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">

@@ -73,6 +73,8 @@ export async function POST(request: Request) {
 
   const allNotes = await getNotesByUser(userId)
 
+  console.log("allNotes", allNotes)
+
   const prompt = makePrompt(allNotes, userInput)
 
   // pass the prompt to the AI
@@ -98,10 +100,34 @@ export async function POST(request: Request) {
     }),
   })
 
+  if (result.object.notes.length === 0) {
+    // Create a dummy note
+    const dummyNote = {
+      title: "Untitled Note",
+      content: userInput, // Original user input
+      tags: [],
+      generated_note: "No additional notes were generated for this content."
+    }
+    
+    const createdNotes = await createNotes([dummyNote], userId)
+
+    return Response.json({
+      success: true,
+      notes: createdNotes,
+      message: "Created basic note"
+    })
+  }
+
   const createdNotes = await createNotes(result.object.notes, userId)
 
   // const textResult = await result.text
   // console.log(result.object)
 
-  return Response.json(createdNotes)
+  // return Response.json(createdNotes)
+
+  return Response.json({
+    success: true,
+    notes: createdNotes,
+    message: "Notes created successfully"
+  })
 }
