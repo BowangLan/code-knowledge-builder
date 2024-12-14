@@ -9,6 +9,7 @@ import {
   primaryKey,
   foreignKey,
   boolean,
+  jsonb,
 } from 'drizzle-orm/pg-core';
 
 export const user = pgTable('User', {
@@ -18,6 +19,20 @@ export const user = pgTable('User', {
 });
 
 export type User = InferSelectModel<typeof user>;
+
+export const note = pgTable('Note', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  title: text('title').notNull(),
+  content: text('content').notNull(),
+  tags: jsonb('tags').notNull().default([]),
+  userId: uuid('userId')
+    .notNull()
+    .references(() => user.id),
+  createdAt: timestamp('createdAt').notNull().defaultNow(),
+  updatedAt: timestamp('updatedAt').notNull().defaultNow(),
+});
+
+export type Note = InferSelectModel<typeof note>;
 
 export const chat = pgTable('Chat', {
   id: uuid('id').primaryKey().notNull().defaultRandom(),
