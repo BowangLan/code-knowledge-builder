@@ -24,7 +24,7 @@ export const note = pgTable('Note', {
   id: uuid('id').primaryKey().notNull().defaultRandom(),
   title: text('title').notNull(),
   content: text('content').notNull(),
-  tags: jsonb('tags').notNull().default([]),
+  tags: jsonb('tags').$type<string[]>().notNull().default([]),
   userId: uuid('userId')
     .notNull()
     .references(() => user.id),

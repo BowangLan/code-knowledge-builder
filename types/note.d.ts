@@ -2,7 +2,7 @@ type Note = {
   id: string;
   title: string;
   content: string;
-  tags: unknown;
+  tags: string[];
   userId: string;
   createdAt: Date;
   updatedAt: Date;
@@ -11,7 +11,7 @@ type Note = {
 type NoteCreateParams = {
   title: string;
   content: string;
-  tags: unknown;
+  tags: string[];
 }
 
 type NoteCreateParamsWithUserId = NoteCreateParams & {
@@ -21,7 +21,7 @@ type NoteCreateParamsWithUserId = NoteCreateParams & {
 type NoteUpdateParams = {
   title?: string;
   content?: string;
-  tags?: unknown;
+  tags?: string[];
 }
 
 type NoteUpdateParamsWithUserId = NoteUpdateParams & {

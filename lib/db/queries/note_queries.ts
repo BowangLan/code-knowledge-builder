@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { note } from '../schema';
 import { db } from './client';
 
@@ -7,7 +7,7 @@ export function getNoteById(id: string) {
 }
 
 export function getNotesByUser(userId: string) {
-  return db.select().from(note).where(eq(note.userId, userId));
+  return db.select().from(note).where(eq(note.userId, userId)).orderBy(desc(note.createdAt));
 }
 
 export function deleteNoteById(id: string) {
@@ -15,7 +15,7 @@ export function deleteNoteById(id: string) {
 }
 
 export function createNotes(data: NoteCreateParams[], userId: string) {
-  return db.insert(note).values(data.map((note) => ({ ...note, userId })));
+  return db.insert(note).values(data.map((note) => ({ ...note, userId }))).returning();
 }
 
 export function updateNoteById(id: string, data: NoteUpdateParams) {
