@@ -39,12 +39,13 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     DEFAULT_MODEL_NAME;
 
   return (
-    <Chat
-      id={chat.id}
-      initialMessages={convertToUIMessages(messagesFromDb)}
-      selectedModelId={selectedModelId}
-      selectedVisibilityType={chat.visibility}
-      isReadonly={session?.user?.id !== chat.userId}
-    />
+    // <Chat
+    //   id={chat.id}
+    //   initialMessages={convertToUIMessages(messagesFromDb)}
+    //   selectedModelId={selectedModelId}
+    //   selectedVisibilityType={chat.visibility}
+    //   isReadonly={session?.user?.id !== chat.userId}
+    // />
+    <div>main</div>
   );
 }

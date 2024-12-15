@@ -44,7 +44,6 @@ import {
   SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from '@/components/ui/sidebar';
 import type { Chat } from '@/lib/db/schema';
 import { fetcher } from '@/lib/utils';
@@ -150,7 +149,6 @@ export const ChatItem = memo(PureChatItem, (prevProps, nextProps) => {
 });
 
 export function SidebarHistory({ user }: { user: User | undefined }) {
-  const { setOpenMobile } = useSidebar();
   const { id } = useParams();
   const pathname = usePathname();
   const {
