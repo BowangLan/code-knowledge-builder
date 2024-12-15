@@ -26,12 +26,14 @@ const NoteItem: React.FC<NoteProps> = ({ note }) => {
   };
 
   return (
-
-    <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-lg mx-auto md:mx-0 flex flex-col md:flex-row">
+    <div className="bg-white text-black shadow-md rounded-lg p-4 flex flex-col md:flex-row">
       <div className="grow">
-        <h2 className="font-bold text-lg mb-2">{note.title}</h2>
-        <p className="line-clamp-2 mb-4">{note.content}</p>
-        <div className="flex flex-row space-x-52 items-center mb-4w-full ">
+        <h2 className="font-bold text-base mb-1">{note.title}</h2>
+        <div className="flex-1 text-sm line-clamp-3 text-gray-500 mb-4">
+          {note.content}
+        </div>
+        {
+          /* <div className="flex flex-row space-x-52 items-center mb-4w-full ">
           <button className="text-blue-500 hover:text-blue-700 transition duration-150 ease-in-out">
             More
           </button>
@@ -41,21 +43,24 @@ const NoteItem: React.FC<NoteProps> = ({ note }) => {
           >
             Remove
           </button>
-        </div>
-        <div className="flex flex-wrap gap-2">
+        </div> */
+        }
+        <div className="flex flex-wrap gap-2 flex-none">
           {note.tags.map((tag, index) => (
             <span
               key={index}
-              className="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              className="bg-gray-200 text-gray-500 text-xs px-2.5 py-0.5 rounded"
             >
-              #{tag}
+              {tag}
             </span>
           ))}
         </div>
       </div>
-      <div className="text-right text-sm text-gray-500 mt-4 md:mt-0 md:ml-4">
+      {
+        /* <div className="text-right text-sm text-gray-500 mt-4 md:mt-0 md:ml-4">
         {formatIsoDate(note.createdAt)}
-      </div>
+      </div> */
+      }
     </div>
   );
 };
