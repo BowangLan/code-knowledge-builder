@@ -26,7 +26,7 @@ const NoteItem: React.FC<NoteProps> = ({ note }) => {
   };
 
   return (
-    <
+
     <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-lg mx-auto md:mx-0 flex flex-col md:flex-row">
       <div className="grow">
         <h2 className="font-bold text-lg mb-2">{note.title}</h2>
