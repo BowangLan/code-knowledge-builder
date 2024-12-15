@@ -114,13 +114,16 @@ export function CreateNoteModal() {
                   Successfully Generated {generatedNote.length} Notes
                 </Dialog.Title>
 
-                <div className="pt-2 pb-6">
+                <div className="pt-2 pb-6 max-h-[400px] overflow-y-scroll">
                   {generatedNote?.map((n, i) => {
                     return (
-                      <div key={i} className="py-2">
-                        <h3 className="text-sm font-medium">{n.title}</h3>
-                        <div className="pt-1 text-xs text-muted-foreground">
-                          {n.content}
+                      <div key={i} className="py-2 flex flex-row">
+                        <div className="mr-3 font-medium text-sm">{i + 1}</div>
+                        <div className="flex-1 flex flex-col">
+                          <h3 className="text-sm">{n.title}</h3>
+                          <div className="pt-1 text-xs text-muted-foreground">
+                            {n.content}
+                          </div>
                         </div>
                       </div>
                     );
