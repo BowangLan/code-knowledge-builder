@@ -6,6 +6,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { PlusCircle, X } from "lucide-react";
+import { useNotesStore } from "@/store/notes-store";
 
 export function CreateNoteModal() {
   const [code, setCode] = useState("");
@@ -39,6 +40,7 @@ export function CreateNoteModal() {
         setGeneratedNote(data.notes);
         setOpen(false); // Close create modal
         setShowNoteModal(true); // Show note display modal
+        useNotesStore.getState().addNotes(data.notes);
       } else {
         throw new Error(data.message || "Failed to create note");
       }
